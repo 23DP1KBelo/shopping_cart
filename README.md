@@ -1,2 +1,2 @@
-# java-console
-project template for Java CLI app
+# Shopping cart
+Java CLI app
