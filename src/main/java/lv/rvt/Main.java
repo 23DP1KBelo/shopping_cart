@@ -1,11 +1,21 @@
 package lv.rvt;
 
-import java.util.*;
+import java.util.Scanner;
 
 public class Main 
 {
+    @SuppressWarnings("resource")
     public static void main( String[] args )
     {
-        // Make your first Hello World!
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Enter your username: ");
+        String username = scanner.nextLine();
+
+        System.out.println("Enter your email: ");
+        String email = scanner.nextLine();
+
+        user person = new user(username, email);
+        person.addUser();
     }
 }
