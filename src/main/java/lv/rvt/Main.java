@@ -1,21 +1,16 @@
 package lv.rvt;
 
+import java.io.IOException;
 import java.util.Scanner;
+
 
 public class Main 
 {
-    @SuppressWarnings("resource")
-    public static void main( String[] args )
+    public static void main( String[] args ) throws IOException
     {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Enter your username: ");
-        String username = scanner.nextLine();
-
-        System.out.println("Enter your email: ");
-        String email = scanner.nextLine();
-
-        user person = new user(username, email);
-        person.addUser();
+        User user = new User(scanner.nextLine(), scanner.nextLine());
+        UserManager.addUser(user);
     }
 }

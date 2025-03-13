@@ -1,2 +1,3 @@
-# Shopping cart
+# Freshly
+## User guide
 Java CLI app
