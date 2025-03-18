@@ -13,6 +13,13 @@ public class User {
         return this.username + ", " + this.email;
     }
 
+    public String getUsername(){
+        return this.username;
+    }
+
+    public String getEmail(){
+        return this.email;
+    }
     @Override
     public String toString() {
         return this.username + " " + this.email;
