@@ -1,13 +1,13 @@
 package lv.rvt;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 
 public class Main 
 {
     public static void main( String[] args ) throws IOException
     {
-        UserManager.users();
+        UserManager.users(); //Add users
+        
     }
 }

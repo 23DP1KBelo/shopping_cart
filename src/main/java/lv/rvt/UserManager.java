@@ -2,6 +2,7 @@ package lv.rvt;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
@@ -34,33 +35,32 @@ public class UserManager {
         return UserList;
     }
 
-    public static void addUser() throws IOException{
+    public static void addUser(String username, String email) throws IOException{
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Please enter your username again: ");
-        String username = scanner.nextLine();
-
-        System.out.println("Please enter your email again: ");
-        String email = scanner.nextLine();
-
+        String fileName = "data/user_shoppng_cart/"+username + ".csv";
         User newUser = new User(username, email);
 
         BufferedWriter writer = Helper.getWriter("users.csv", StandardOpenOption.APPEND);
         writer.write(newUser.toCsvRow());
         writer.newLine(); 
         writer.close();
+        System.out.println("User added succsesfully!");
+
+        @SuppressWarnings("unused")
+        BufferedWriter Newfile = new BufferedWriter(new FileWriter(fileName));
     }
 
     public static boolean userVerification(String username, String email) throws IOException{
-                getUserlist();
+        getUserlist();
         
-                for (User user : UserList) {
-                    if (user.getUsername().equalsIgnoreCase(username) || user.getEmail().equalsIgnoreCase(email)) {
-                        return true;
-                    }
-                }
-                return false;
+        for (User user : UserList) {
+            if (user.getUsername().equalsIgnoreCase(username) || user.getEmail().equalsIgnoreCase(email)) {
+                return true;
             }
+        }
+            return false;
+    }
         
     public static void users() throws IOException{
         Scanner scanner = new Scanner(System.in);
@@ -75,7 +75,11 @@ public class UserManager {
             System.out.println("User exists in the system. Try a different one!");
             users();
         } else {
-            addUser(); 
+            addUser(username, email); 
         }
+    }
+
+    public static void login(){
+        
     }
 }
