@@ -14,10 +14,7 @@ public class UserManager {
 
     private static final String DELIMITER = ", ";
     public static ArrayList<User> UserList = new ArrayList<>();
-    public void run() {
-        
-    }
-
+  
     public static ArrayList<User> getUserlist() throws IOException{
         BufferedReader reader = Helper.getReader("users.csv");
         String line;

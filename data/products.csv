@@ -1,0 +1,61 @@
+﻿cateogrie;product;price;weight
+Vegetables;Carrots;0.75;300
+Vegetables;Broccoli;0.84;300
+Vegetables;Spinach;1.14;300
+Vegetables;Cucumber;0.33;300
+Vegetables;Bell pepper;0.66;300
+Vegetables;Cauliflower;3.04;300
+Vegetables;Zucchini;0.66;300
+Vegetables;Kale;1.14;300
+Vegetables;Potato;0.9;300
+Vegetables;Tomato;0.87;300
+Fruits;Apple;0.6;300
+Fruits;Banana;0.45;300
+Fruits;Orange;0.6;300
+Fruits;Grape;1.05;300
+Fruits;Strawberry;0.13;35
+Fruits;Pineapple;2.25;900
+Fruits;Watermelon;4;4000
+Fruits;Kiwi;0.81;300
+Fruits;Peach;0.75;300
+Fruits;Mango;1.26;300
+Flour products;White bread;0.75;500
+Flour products;Wheat bread;1;1000
+Flour products;Spaghetti;0.45;500
+Flour products;Pizza dough;1.25;500
+Flour products;Cake flour;2.2;1000
+Flour products;Croissants;0.35;50
+Flour products;Tortillas;0.25;100
+Flour products;Flour;0.8;1000
+Flour products;Penne pasta;0.8;500
+Flour products;Rye bread;0.6;500
+Drinks;Water;0.7;1
+Drinks;Coca-cola;1.5;1
+Drinks;Apple juice;2;1
+Drinks;Icea Tea;1.9;1
+Drinks;Sports water;1.2;1
+Drinks;Water spakling;0.75;1
+Drinks;Orange juice;2.1;1
+Drinks;Fanta;1.6;1
+Drinks;Pepsi;1.3;1
+Drinks;Lemonade;1.63;1
+Dairy products;Milk;0.9;1
+Dairy products;Cheddar cheese;2;250
+Dairy products;Butter;1;250
+Dairy products;Yogurt ;0.9;450
+Dairy products;Sour cream;1.25;1000
+Dairy products;Cottage cheese;0.9;300
+Dairy products;Greek yogurt;1.8;450
+Dairy products;Ice cream strawberry box 500g;3;500
+Dairy products;Ice cream vanila box 500g;2.7;500
+Dairy products;Ice cream chocolate box 500g;3.1;500
+Meat;Chicken breast;1.4;200
+Meat;Ground beef;3;500
+Meat;Bacon (sliced);2;250
+Meat;Steak;4.5;300
+Meat;Lamb chops;4.25;250
+Meat;Turkey brest;4;500
+Meat;Sausages;1.05;150
+Meat;Ham;4;400
+Meat;Chicken wings;0.3;40
+Meat;Salami;3.6;300

@@ -24,4 +24,5 @@ public class User {
     public String toString() {
         return this.username + " " + this.email;
     }
+
 }

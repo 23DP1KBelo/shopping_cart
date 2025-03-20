@@ -2,8 +2,11 @@
 2. Product class
     - add products to cart
     - remove products from cart
-    - filter the products in categories
+    - filter the products in categories +
     - the sum of all products
-3. Product csv
+3. Product csv +
 4. Product class works with users
-5. Validation for user/email 
+5. Cart class
+    - aprekini
+    - izvada tabulu ar cart
+. Validation for user/email 
