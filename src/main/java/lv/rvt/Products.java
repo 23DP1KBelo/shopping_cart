@@ -7,7 +7,7 @@ public class Products {
     public String weight;
     public Integer quantity;
 
-    public Products(String categories,String name, String weight, Double price, Integer quantity){
+    public Products(String categories,String name, Double price, String weight, Integer quantity){
         this.categorie = categories;
         this.name = name;
         this.price = price;

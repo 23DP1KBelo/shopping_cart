@@ -10,9 +10,13 @@ import java.util.Scanner;
 
 import lv.rvt.tools.Helper;
 
-public class UserManager {
+public class UserManager extends  User {
 
-    private static final String DELIMITER = ", ";
+   public UserManager(String username, String email) {
+           super(username, email);
+       }
+   
+    public static final String DELIMITER = ", ";
     public static ArrayList<User> UserList = new ArrayList<>();
   
     public static ArrayList<User> getUserlist() throws IOException{
@@ -32,10 +36,9 @@ public class UserManager {
         return UserList;
     }
 
-    public static void addUser(String username, String email) throws IOException{
+    private static void addUser(String username, String email) throws IOException{
         Scanner scanner = new Scanner(System.in);
 
-        String fileName = "data/user_shoppng_cart/"+username + ".csv";
         User newUser = new User(username, email);
 
         BufferedWriter writer = Helper.getWriter("users.csv", StandardOpenOption.APPEND);
@@ -43,12 +46,11 @@ public class UserManager {
         writer.newLine(); 
         writer.close();
         System.out.println("User added succsesfully!");
-
-        @SuppressWarnings("unused")
-        BufferedWriter Newfile = new BufferedWriter(new FileWriter(fileName));
+        
+        Cart.makeCart();
     }
 
-    public static boolean userVerification(String username, String email) throws IOException{
+    private static boolean userVerification(String username, String email) throws IOException{
         getUserlist();
         
         for (User user : UserList) {
@@ -64,7 +66,8 @@ public class UserManager {
         
         System.out.println("Please enter your username: ");
         String username = scanner.nextLine();
-        
+        User.setCurrentUsername(username);
+
         System.out.println("Please enter your email: ");
         String email = scanner.nextLine();
         
@@ -76,7 +79,35 @@ public class UserManager {
         }
     }
 
-    public static void login(){
+    public static void login() throws IOException{
+        Scanner scanner = new Scanner(System.in);
         
+        System.out.println("Please enter your username: ");
+        String username = scanner.nextLine();
+
+        System.out.println("Please enter your email: ");
+        String email = scanner.nextLine();
+
+        User user = new User (username, email);
+
+        if (userVerification(username, email)) {
+            System.out.println("Welcome "+ username + " to your account!");
+            User.setCurrentUsername(username);
+
+        } else {
+            System.out.println("User dosen't exists in the system. Try a different one!");
+        }
     }
+
+    public static void saveCartToFile() throws IOException {
+        String username = User.getCurrentUsername();
+        String fileName = "data/user_shoppng_cart/" + username + ".csv";
+        BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true));
+        for (Cart cartItem : Cart.cart) {
+            writer.write(cartItem.toCsvRow());
+            writer.newLine();
+        }
+        writer.close();
+    }
+ 
 }

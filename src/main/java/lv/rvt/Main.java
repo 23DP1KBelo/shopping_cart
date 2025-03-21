@@ -7,8 +7,13 @@ public class Main
 {
     public static void main( String[] args ) throws IOException
     {
-        // UserManager.users(); //Add users
+        UserManager.users(); //Add users
     
-        ProductManager.productsByCategorie();
+        // ProductManager.productsByCategorie(); //get products by categorie
+
+        // UserManager.login(); //Login 
+
+        ProductManager.productsByCategorie(); 
+
     }
 }
