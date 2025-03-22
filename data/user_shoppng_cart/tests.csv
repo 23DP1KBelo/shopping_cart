@@ -1,0 +1,13 @@
+session number;categorie;name;price;weight;quantity
+1;Meat;Ground beef;30.0;500;10
+2;Drinks;Coca-cola;1.5;1;1
+3;Fruits;Kiwi;8.100000000000001;300;10
+3;Fruits;Kiwi;8.100000000000001;300;10
+4;Meat;Ham;8.0;400;2
+3;Fruits;Kiwi;8.100000000000001;300;10
+4;Meat;Ham;8.0;400;2
+5;Drinks;Icea Tea;19.0;1;10
+6;Drinks;Pepsi;1.3;1;1
+7;Fruits;Banana;0.9;300;2
+7;Fruits;Banana;0.9;300;2
+8;Meat;Salami;7.2;300;2

@@ -38,6 +38,10 @@ public class Products {
         return this.price;
     }
 
+    public Integer getQuantity(){
+        return this.quantity;
+    }
+
     public String getWeight(){
         return this.weight;
     }

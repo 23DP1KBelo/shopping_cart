@@ -23,7 +23,7 @@ public class ProductManager extends Products {
 
         reader.readLine();
         while ((line = reader.readLine()) != null) {
-            String[] parts = line.trim().split(DELIMITER);
+            String[] parts = line.trim().split(ProductManager.DELIMITER);
 
             String categorie = parts[0].trim();
             String name = parts[1];
@@ -50,12 +50,21 @@ public class ProductManager extends Products {
         return productsByCategorie;
     }
 
-    public static void productsByCategorie() throws IOException {
-        @SuppressWarnings("resource")
+    public static boolean productsByCategorie() throws IOException {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("""
-                           Categories:
-
+        while (true) {
+            System.out.println("Please write 'add Items' to add products to your cart or 'exit' to quit:");
+    
+            String programmRun = scanner.nextLine().trim();
+    
+            if (programmRun.equalsIgnoreCase("exit")) {
+                System.out.println("Exiting the program...");
+                return false; 
+            }
+    
+            if (programmRun.equalsIgnoreCase("add Items")) {
+                System.out.println("Categories:");
+                System.out.println("""
                            Vegetables
                            Fruits
                            Flour products
@@ -63,62 +72,40 @@ public class ProductManager extends Products {
                            Dairy products
                            Meat
                            """);
-
-        System.out.println("Please put in a category you want to find: ");
-        String userInput = scanner.nextLine().trim();
-
-        ArrayList<Products> filteredProducts = getProductsByCategorie(userInput);
-
-        if (!filteredProducts.isEmpty()) {
-            System.out.println("--------------------------------------------------------------------");
-            System.out.printf(" %-15s |", "Categorie");
-            System.out.printf(" %-30s |", "Name");
-            System.out.printf(" %-5s |", "Price");
-            System.out.printf(" %-6s |", "Weight");
-            System.out.println();
-            for (Products product : filteredProducts) {
-                System.out.println("--------------------------------------------------------------------");
-                System.out.printf(" %-15s | ", product.getCategorie());
-                System.out.printf("%-30s | ", product.getName());
-                System.out.printf("%-5s | ", product.getPrice());
-                System.out.printf("%-6s | ", product.getWeight() + "g");
-                System.out.println();
+    
+                System.out.println("Please put in a category you want to find: ");
+                String userInput = scanner.nextLine().trim();
+    
+                ArrayList<Products> filteredProducts = getProductsByCategorie(userInput);
+    
+                int productNumber = 1;
+                if (!filteredProducts.isEmpty()) {
+                    System.out.println("---------------------------------------------------------------------------");
+                    System.out.printf(" %-5s|", "No.");
+                    System.out.printf(" %-15s |", "Categorie");
+                    System.out.printf(" %-30s |", "Name");
+                    System.out.printf(" %-5s |", "Price");
+                    System.out.printf(" %-6s |", "Weight");
+                    System.out.println();
+                    for (Products product : filteredProducts) {
+                        System.out.println("---------------------------------------------------------------------------");
+                        System.out.printf(" %-4s |", productNumber);
+                        System.out.printf(" %-15s | ", product.getCategorie());
+                        System.out.printf("%-30s | ", product.getName());
+                        System.out.printf("%-5s | ", product.getPrice());
+                        System.out.printf("%-6s | ", product.getWeight());
+                        System.out.println();
+    
+                        productNumber++;
+                    }
+                    System.out.println("---------------------------------------------------------------------------");
+                    Cart.addToCart(filteredProducts);
+                } else {
+                    System.out.println();
+                    System.out.println("Sorry, no items in this category! Please select a category from the list.");
+                    System.out.println();
+                }
             }
-            System.out.println("--------------------------------------------------------------------");
-            addToCart(filteredProducts);
-        } else {
-            System.out.println();
-            System.out.println("""
-                               Sorry, no items in this category!
-                               Please select a category from the list!""");
-            System.out.println();
-
-            productsByCategorie();
         }
-    }
-
-    public static void addToCart(ArrayList<Products> filteredProducts) throws IOException {
-        @SuppressWarnings("resource")
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Please enter the number of the product you want to add to your cart (1, 2, etc.): ");
-        int productNumber = scanner.nextInt();
-
-        if (productNumber < 1 || productNumber > filteredProducts.size()) {
-            System.out.println("Invalid product selection.");
-            return;
-        }
-
-        Products selectedProduct = filteredProducts.get(productNumber - 1);
-        
-        System.out.println("Enter the quantity you want to add to the cart: ");
-        int quantity = scanner.nextInt();
-        
-        Cart newCartItem = new Cart(selectedProduct.getCategorie(), selectedProduct.getName(), selectedProduct.getPrice(), selectedProduct.getWeight(), quantity, "username");  // Replace with actual username
-        Cart.cart.add(newCartItem);
-
-        UserManager.saveCartToFile();
-
-        System.out.println("Product added to your cart!");
-    }
+    } 
 }

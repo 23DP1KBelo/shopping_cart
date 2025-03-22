@@ -1,11 +1,11 @@
 1. ADD USER +
 2. Product class
-    - add products to cart
+    - add products to cart +
     - remove products from cart
     - filter the products in categories +
 3. Product csv +
-4. Product class works with users
+4. Product class works with users +
 5. Cart class
     - aprekini
-    - izvada tabulu ar cart
+    - izvada tabulu ar cart 
 . Validation for user/email 

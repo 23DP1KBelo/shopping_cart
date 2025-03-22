@@ -2,7 +2,6 @@ package lv.rvt;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
@@ -25,13 +24,15 @@ public class UserManager extends  User {
 
         reader.readLine();       
         while ((line = reader.readLine()) != null) {
-            String[] parts = line.trim().split(UserManager.DELIMITER);
+            String[] parts = line.trim().split(DELIMITER);
 
-            String username = parts[0];
-            String email = parts[1];
-
-            User user = new User(username, email);
-            UserList.add(user);
+            if (parts.length >= 2) {
+                String username = parts[0];
+                String email = parts[1];
+    
+                User user = new User(username, email);
+                UserList.add(user);
+            }
         }
         return UserList;
     }
@@ -98,16 +99,4 @@ public class UserManager extends  User {
             System.out.println("User dosen't exists in the system. Try a different one!");
         }
     }
-
-    public static void saveCartToFile() throws IOException {
-        String username = User.getCurrentUsername();
-        String fileName = "data/user_shoppng_cart/" + username + ".csv";
-        BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true));
-        for (Cart cartItem : Cart.cart) {
-            writer.write(cartItem.toCsvRow());
-            writer.newLine();
-        }
-        writer.close();
-    }
- 
 }
