@@ -34,6 +34,7 @@ public class Cart extends Products{
         super(categories, name, price, weight);
     }
 
+    @Override
     public String toCsvRow() {
         return this.sessonId + ";" + this.categorie + ";" + this.name + ";" + this.price + ";" + this.weight + ";" + this.quantity;
     }
@@ -42,23 +43,26 @@ public class Cart extends Products{
         return this.sessonId;
     }
 
-    public static int getLastSessionId() throws IOException {
+    public static Integer getLastSessionId() throws IOException {
         String username = User.getCurrentUsername();
         String fileName = "data/user_shoppng_cart/" + username + ".csv";
         File file = new File(fileName);
 
         BufferedReader reader = new BufferedReader(new FileReader(fileName));
         String line;
-        int lastSessionId = 0;
+        Integer lastSessionId = 0;
 
         reader.readLine();
         while ((line = reader.readLine()) != null) {
             String[] parts = line.trim().split(DELIMITER);
-            int sessionId = Integer.valueOf(parts[0].trim());
+            Integer sessionId = Integer.valueOf(parts[0].trim());
             lastSessionId = sessionId;
         }
-
         reader.close();
+
+        if(lastSessionId == null){
+            lastSessionId = 0;
+        }
         return lastSessionId+1;
     }
 
@@ -133,7 +137,6 @@ public class Cart extends Products{
         Cart newCartItem = new Cart(sessionId,selectedProduct.getCategorie(), selectedProduct.getName(), selectedProduct.getPrice()*quantity, selectedProduct.getWeight(), quantity);
         Cart.cart.add(newCartItem);
 
-        saveCartToFile();
 
         System.out.println("Product/s added to your cart!");
     }

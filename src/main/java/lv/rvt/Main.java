@@ -14,7 +14,7 @@ public class Main
         // ProductManager.productsByCategorie(); //get products in cart
 
 
-        Cart.showAllPurchases(); //see all Purchases
+        // Cart.showAllPurchases(); //see all Purchases
 
     }
 }

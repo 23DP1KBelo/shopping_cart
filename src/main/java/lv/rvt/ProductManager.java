@@ -58,6 +58,7 @@ public class ProductManager extends Products {
             String programmRun = scanner.nextLine().trim();
     
             if (programmRun.equalsIgnoreCase("exit")) {
+                Cart.saveCartToFile();
                 System.out.println("Exiting the program...");
                 return false; 
             }

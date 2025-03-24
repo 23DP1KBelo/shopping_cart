@@ -55,7 +55,7 @@ public class UserManager extends  User {
         getUserlist();
         
         for (User user : UserList) {
-            if (user.getUsername().equalsIgnoreCase(username) || user.getEmail().equalsIgnoreCase(email)) {
+            if (user.getUsername().equalsIgnoreCase(username) && user.getEmail().equalsIgnoreCase(email)) {
                 return true;
             }
         }
