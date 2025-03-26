@@ -10,3 +10,4 @@
         - cart sum
     - izvada tabulu ar cart +
 . Validation for user/email 
+6. User interface
