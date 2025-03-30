@@ -55,14 +55,15 @@ public class UserManager extends  User {
         getUserlist();
         
         for (User user : UserList) {
-            if (user.getUsername().equalsIgnoreCase(username) && user.getEmail().equalsIgnoreCase(email)) {
+            if (user.getUsername().equalsIgnoreCase(username) || user.getEmail().equalsIgnoreCase(email)) {
                 return true;
             }
         }
             return false;
     }
         
-    public static void users() throws IOException{
+    public static Boolean users() throws IOException{
+
         Scanner scanner = new Scanner(System.in);
         
         System.out.println("Please enter your username: ");
@@ -74,13 +75,14 @@ public class UserManager extends  User {
         
         if (userVerification(username, email)) {
             System.out.println("User exists in the system. Try a different one!");
-            users();
+            return false;
         } else {
             addUser(username, email); 
+            return true;
         }
     }
 
-    public static void login() throws IOException{
+    public static Boolean login() throws IOException{
         Scanner scanner = new Scanner(System.in);
         
         System.out.println("Please enter your username: ");
@@ -94,9 +96,11 @@ public class UserManager extends  User {
         if (userVerification(username, email)) {
             System.out.println("Welcome "+ username + " to your account!");
             User.setCurrentUsername(username);
+            return true;
 
         } else {
             System.out.println("User dosen't exists in the system. Try a different one!");
+            return false;
         }
     }
 }

@@ -67,7 +67,7 @@ public class Cart extends Products{
     }
 
 
-    public static String getCartFileName() {
+    private static String getCartFileName() {
         String username = User.getCurrentUsername();  
         return "data/user_shoppng_cart/" + username + ".csv";
     }
@@ -187,5 +187,51 @@ public class Cart extends Products{
         }
     
         System.out.println("-------------------------------------------------------------------------------------");
+    }
+
+    public static void cartSum() throws IOException{
+        String username = User.getCurrentUsername();
+        ArrayList<Cart> cartItems = Cart.getCart(username);
+
+        if (cartItems.isEmpty()) {
+            System.out.println("No purchases in your cart!");
+            return;
+        }
+
+        Integer lastSessionId = cartItems.get(cartItems.size() - 1).getSessionId();
+
+        System.out.println("-------------------------------------------------------------------------------------");
+        System.out.printf(" %-2s |", "No.");
+        System.out.printf(" %-15s |", "Categorie");
+        System.out.printf(" %-30s |", "Name");
+        System.out.printf(" %-5s |", "Price");
+        System.out.printf(" %-6s |", "Weight");
+        System.out.printf(" %-5s |", "Quantity");
+        System.out.println();
+        System.out.println("-------------------------------------------------------------------------------------");
+
+        Integer productNumber = 1;
+        Double sum =  0.0;
+        for (Cart cartItem : cartItems) {
+            if (cartItem.getSessionId().equals(lastSessionId)) {
+                System.out.println("-------------------------------------------------------------------------------------");
+                System.out.printf(" %-3s |", productNumber);
+                System.out.printf(" %-15s |", cartItem.getCategorie());
+                System.out.printf(" %-30s |", cartItem.getName());
+                System.out.printf(" %-5.2f |", cartItem.getPrice());
+                System.out.printf(" %-6s |", cartItem.getWeight());
+                System.out.printf(" %-8s |", cartItem.getQuantity());
+                System.out.println();
+
+                sum += cartItem.getPrice();
+
+                productNumber++;
+            }
+        }
+
+        System.out.println("-------------------------------------------------------------------------------------");
+        System.out.println();
+        System.out.println("Total: " + sum);
+
     }
 }

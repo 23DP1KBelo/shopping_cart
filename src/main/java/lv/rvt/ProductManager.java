@@ -53,17 +53,16 @@ public class ProductManager extends Products {
     public static boolean productsByCategorie() throws IOException {
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            System.out.println("Please write 'add Items' to add products to your cart or 'exit' to quit:");
+            System.out.println("Please write [A] to add products to your cart or [X] to leave the cart:");
     
             String programmRun = scanner.nextLine().trim();
     
-            if (programmRun.equalsIgnoreCase("exit")) {
+            if (programmRun.equalsIgnoreCase("X")) {
                 Cart.saveCartToFile();
-                System.out.println("Exiting the program...");
                 return false; 
             }
     
-            if (programmRun.equalsIgnoreCase("add Items")) {
+            if (programmRun.equalsIgnoreCase("A")) {
                 System.out.println("Categories:");
                 System.out.println("""
                            Vegetables
