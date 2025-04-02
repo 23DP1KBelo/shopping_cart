@@ -73,6 +73,7 @@ public class Cart extends Products{
     }
 
     public static void makeCart() throws IOException {
+        cart.clear();
         String fileName = getCartFileName();
         BufferedWriter Newfile = new BufferedWriter(new FileWriter(fileName));
         Newfile.write("session number;categorie;name;price;weight;quantity");
@@ -86,7 +87,7 @@ public class Cart extends Products{
 
         BufferedReader reader = new BufferedReader(new FileReader(fileName));
         String line;
-        ArrayList<Cart> cart = new ArrayList<>();
+        ArrayList<Cart> allChecks = new ArrayList<>();
     
         reader.readLine();
         while ((line = reader.readLine()) != null) {
@@ -100,11 +101,15 @@ public class Cart extends Products{
             Integer quantity = Integer.valueOf(parts[5].trim());
     
             Cart cartItem = new Cart(sessionId,categorie, name, price, weight, quantity);
-            cart.add(cartItem);
+            allChecks.add(cartItem);
         }
         reader.close();
-        return cart;
+        return allChecks;
     }
+
+    public static ArrayList<Cart> getCurrentCart() throws IOException{
+        return cart;
+    } 
 
     public static void saveCartToFile() throws IOException {
         String username = User.getCurrentUsername();
@@ -122,26 +127,44 @@ public class Cart extends Products{
         Scanner scanner = new Scanner(System.in);
         
         System.out.println("Please enter the number of the product you want to add to your cart (1, 2, etc.): ");
-        int productNumber = scanner.nextInt();
+        Integer productNumber = Integer.valueOf(scanner.nextLine());
         if (productNumber < 1 || productNumber > filteredProducts.size()) {
             System.out.println("Invalid product selection.");
             return;
         }
-
+    
         Products selectedProduct = filteredProducts.get(productNumber - 1);
         
         System.out.println("Enter the quantity you want to add to the cart: ");
-        int quantity = scanner.nextInt();
-
+        Integer quantity = Integer.valueOf(scanner.nextLine());
+    
         Integer sessionId = Cart.getLastSessionId();
-        Cart newCartItem = new Cart(sessionId,selectedProduct.getCategorie(), selectedProduct.getName(), selectedProduct.getPrice()*quantity, selectedProduct.getWeight(), quantity);
+        Cart newCartItem = new Cart(sessionId, selectedProduct.getCategorie(), selectedProduct.getName(), selectedProduct.getPrice() * quantity, selectedProduct.getWeight(), quantity);
         Cart.cart.add(newCartItem);
-
-
+    
         System.out.println("Product/s added to your cart!");
+
+        ConsoleManeger.clearScreen();
+        ConsoleManeger.title();
+    }
+
+    public static void removeFromCart() throws IOException{
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.println("Please enter the number of the product you want to remove (1, 2, etc.): ");
+        Integer productNumber = Integer.valueOf(scanner.nextLine());
+
+        if (productNumber < 1 || productNumber > cart.size()) {
+            System.out.println("Invalid product selection.");
+            return;
+        }
+        Cart.cart.remove(productNumber -1);
     }
 
     public static void showAllPurchases() throws IOException {
+        ConsoleManeger.clearScreen();
+        ConsoleManeger.title();
+
         String username = User.getCurrentUsername();
         ArrayList<Cart> cartItems = Cart.getCart(username);
     
@@ -187,18 +210,21 @@ public class Cart extends Products{
         }
     
         System.out.println("-------------------------------------------------------------------------------------");
+        System.out.println();
     }
 
-    public static void cartSum() throws IOException{
-        String username = User.getCurrentUsername();
-        ArrayList<Cart> cartItems = Cart.getCart(username);
+    public static void cartSummary() throws IOException{
+        ConsoleManeger.clearScreen();
+        ConsoleManeger.title();
 
-        if (cartItems.isEmpty()) {
-            System.out.println("No purchases in your cart!");
+        Scanner scanner = new Scanner(System.in);
+
+        if (cart.isEmpty()) {
+            System.out.println("No puroducts in your cart!");
             return;
         }
 
-        Integer lastSessionId = cartItems.get(cartItems.size() - 1).getSessionId();
+        Integer lastSessionId = cart.get(cart.size() - 1).getSessionId();
 
         System.out.println("-------------------------------------------------------------------------------------");
         System.out.printf(" %-2s |", "No.");
@@ -212,7 +238,7 @@ public class Cart extends Products{
 
         Integer productNumber = 1;
         Double sum =  0.0;
-        for (Cart cartItem : cartItems) {
+        for (Cart cartItem : cart) {
             if (cartItem.getSessionId().equals(lastSessionId)) {
                 System.out.println("-------------------------------------------------------------------------------------");
                 System.out.printf(" %-3s |", productNumber);
@@ -233,5 +259,29 @@ public class Cart extends Products{
         System.out.println();
         System.out.println("Total: " + sum);
 
+        System.out.println("[R] - Remove product            [C] - checkout            [ ] - back");
+        String remove = scanner.nextLine();
+
+        if(remove.equalsIgnoreCase("R")){
+            removeFromCart();
+            cartSummary();
+            System.out.println("Product removed succesfuly!");
+            System.out.println();
+        }else if(remove.equalsIgnoreCase("C")){
+            checkout();
+        }
     }
+
+    public static void checkout() throws IOException{
+        String username = User.getCurrentUsername();
+    
+        if (cart.isEmpty()) {
+            System.out.println();
+            System.out.println("No items found for user: " + username);
+        }else{
+            System.out.println("Error checkout not completed!");
+        }
+        cart.clear();
+    }
+
 }
