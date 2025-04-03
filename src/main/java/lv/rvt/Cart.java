@@ -67,7 +67,7 @@ public class Cart extends Products{
     }
 
 
-    private static String getCartFileName() {
+    public static String getCartFileName() {
         String username = User.getCurrentUsername();  
         return "data/user_shoppng_cart/" + username + ".csv";
     }
