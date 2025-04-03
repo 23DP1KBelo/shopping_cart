@@ -9,7 +9,11 @@ import java.util.Scanner;
 
 import lv.rvt.tools.Helper;
 
-public class UserManager {
+public class UserManager extends User {
+
+    public UserManager(String username, String email) {
+        super(username, email);
+    }
    
     public static final String DELIMITER = ", ";
     public static ArrayList<User> UserList = new ArrayList<>();
@@ -101,7 +105,6 @@ public class UserManager {
         if (userVerification(username, email)) {
             User.setCurrentUsername(username);
             return true;
-
         } else {
             System.out.println("User dosen't exists in the system. Try a different one!");
             return false;
