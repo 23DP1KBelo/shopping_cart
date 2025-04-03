@@ -1,7 +1,5 @@
 package lv.rvt;
 
-import org.apache.commons.validator.routines.EmailValidator;
-
 public class User {
     private String username;
     private  String email;
@@ -39,10 +37,4 @@ public class User {
     public String toString() {
         return this.username + " " + this.email;
     }
-
-    public static boolean emailValidation(String email){
-        EmailValidator validator = EmailValidator.getInstance();
-        return validator.isValid(email);
-    }
-
 }

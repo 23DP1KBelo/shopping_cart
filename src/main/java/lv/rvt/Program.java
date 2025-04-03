@@ -89,8 +89,7 @@ public class Program {
                             }
                         }
                     }else if(answer.equalsIgnoreCase("O")){
-                        Cart.saveCartToFile();
-                        System.out.println("Purchess sucessfull!");
+                        Cart.checkout();
                     }else{
                         System.out.println();
                         System.out.println("Invalid input!");
