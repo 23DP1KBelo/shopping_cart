@@ -22,6 +22,10 @@ public class Products {
         this.weight = weight;
     }
 
+    public Products(String name){
+        this.name = name;
+    }
+
     public String toCsvRow() {
         return this.categorie + ";" + this.name + ";" + this.price + ";" + this.weight;
     }

@@ -19,6 +19,7 @@ public class UserManager extends User {
     public static final String DELIMITER = ", ";
     public static ArrayList<User> UserList = new ArrayList<>();
   
+    // get array list with users
     public static ArrayList<User> getUserlist() throws IOException{
         BufferedReader reader = Helper.getReader("users.csv");
         String line;
@@ -38,6 +39,7 @@ public class UserManager extends User {
         return UserList;
     }
 
+    // make new file for user
     private static void addUser(String username, String email) throws IOException{
         Scanner scanner = new Scanner(System.in);
 
@@ -51,6 +53,7 @@ public class UserManager extends User {
         Cart.makeCart();
     }
 
+    // user exists deny Sign in
     private static boolean userVerificationSignIn(String username, String email) throws IOException{
         getUserlist();
         
@@ -62,6 +65,7 @@ public class UserManager extends User {
             return false;
     }
 
+    // user exists allow logIn
     private static boolean userVerificationLognIn(String username, String email) throws IOException{
         getUserlist();
         
@@ -73,14 +77,15 @@ public class UserManager extends User {
             return false;
     }
 
-
+    // pattern for email
     public static boolean patternMatches(String emailAddress) {
         String emailPattern = "^(.+)@(\\S+)$";
         return Pattern.compile(emailPattern)
         .matcher(emailAddress)
         .matches();
     }
-        
+    
+    //Sign in
     public static Boolean users() throws IOException{
         Scanner scanner = new Scanner(System.in);
 
@@ -108,13 +113,14 @@ public class UserManager extends User {
         String email = scanner.nextLine();
 
         if(patternMatches(email)){
-            if(  userVerificationSignIn(username, email)){
+            if(userVerificationSignIn(username, email)){
                 System.out.println("User exists in the system. Try a different one!");
                 return false;
             } else if(username.length() < 3){
                 System.out.println("Invalid username must be atleast 4 charecters!");
                 return false;
             } else {
+                addUser(username, email);
                 ConsoleManeger.clearScreen();
                 ConsoleManeger.title();
                 System.out.println();
@@ -127,6 +133,7 @@ public class UserManager extends User {
         }
     }
 
+    // logIn
     public static Boolean login() throws IOException{
         Scanner scanner = new Scanner(System.in);
         

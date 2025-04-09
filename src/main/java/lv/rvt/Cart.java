@@ -43,6 +43,7 @@ public class Cart extends Products{
         return this.sessonId;
     }
 
+    // gets how many times user has shopped
     public static Integer getLastSessionId() throws IOException {
         String username = User.getCurrentUsername();
         String fileName = "data/user_shoppng_cart/" + username + ".csv";
@@ -66,12 +67,13 @@ public class Cart extends Products{
         return lastSessionId+1;
     }
 
-
+    // gets file name for user
     public static String getCartFileName() {
         String username = User.getCurrentUsername();  
         return "data/user_shoppng_cart/" + username + ".csv";
     }
 
+    // makes a new file for userCart
     public static void makeCart() throws IOException {
         cart.clear();
         String fileName = getCartFileName();
@@ -81,6 +83,7 @@ public class Cart extends Products{
         Newfile.close();
     }
 
+    // get all items that are purchesed
     public static ArrayList<Cart> getCart(String username) throws IOException {
         String fileName = "data/user_shoppng_cart/" + username + ".csv";
         File file = new File(fileName);
@@ -107,10 +110,12 @@ public class Cart extends Products{
         return allChecks;
     }
 
+    // returns arraylist with products of this session
     public static ArrayList<Cart> getCurrentCart() throws IOException{
         return cart;
     } 
 
+    // save Cart to user csv file
     public static void saveCartToFile() throws IOException {
         String username = User.getCurrentUsername();
         String fileName = "data/user_shoppng_cart/" + username + ".csv";
@@ -122,13 +127,14 @@ public class Cart extends Products{
         writer.close();
     }
 
+    // add items to cart
     public static void addToCart(ArrayList<Products> filteredProducts) throws IOException {
         @SuppressWarnings("resource")
         Scanner scanner = new Scanner(System.in);
         
         System.out.println("Please enter the number of the product you want to add to your cart (1, 2, etc.): ");
         Integer productNumber = Integer.valueOf(scanner.nextLine());
-        if (productNumber < 1 || productNumber > filteredProducts.size()) {
+        if (productNumber < 1 || productNumber > 10) {
             System.out.println("Invalid product selection.");
             return;
         }
@@ -148,6 +154,7 @@ public class Cart extends Products{
         ConsoleManeger.title();
     }
 
+    // remove items from cart
     public static void removeFromCart() throws IOException{
         Scanner scanner = new Scanner(System.in);
         
@@ -161,6 +168,7 @@ public class Cart extends Products{
         Cart.cart.remove(productNumber -1);
     }
 
+    // see all purcheses
     public static void showAllPurchases() throws IOException {
         ConsoleManeger.clearScreen();
         ConsoleManeger.title();
@@ -213,6 +221,7 @@ public class Cart extends Products{
         System.out.println();
     }
 
+    // see session added products
     public static void cartSummary() throws IOException{
         ConsoleManeger.clearScreen();
         ConsoleManeger.title();
@@ -272,6 +281,7 @@ public class Cart extends Products{
         }
     }
 
+    // save items to cart
     public static void checkout() throws IOException{
         String username = User.getCurrentUsername();
     
@@ -279,9 +289,10 @@ public class Cart extends Products{
             System.out.println();
             System.out.println("No items found for user: " + username);
         }else{
-            System.out.println("Error checkout not completed!");
+            System.out.println("Checkout sucsessful!");
+            saveCartToFile();
+            cart.clear();
         }
-        cart.clear();
     }
 
 }

@@ -1,12 +1,10 @@
 package lv.rvt;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Program {
     public static void programm() throws IOException{
-
         ConsoleManeger.clearScreen();
         ConsoleManeger.title();
 
@@ -21,7 +19,7 @@ public class Program {
             String logIn = scanner.nextLine();
         
             if (logIn.equalsIgnoreCase("L")) {
-                if(UserManager.login() == true){
+                if (UserManager.login() == true){
                     break;
                 }
             } else if (logIn.equalsIgnoreCase("S")) {
@@ -32,14 +30,14 @@ public class Program {
                        break;
                     }
                 }
-            } else if(logIn.equalsIgnoreCase("X")) {
+            } else if (logIn.equalsIgnoreCase("X")) {
                 exit = true;
                 break;
-            }else{
+            } else {
                 System.out.println("Invalid input.");
             }
         }
-            if(exit == false){
+            if (exit == false){
                 ConsoleManeger.clearScreen();
                 ConsoleManeger.title();
                 while (true) {
@@ -52,15 +50,15 @@ public class Program {
 
                     ConsoleManeger.clearScreen();
                     ConsoleManeger.title();
-                    if(answer.equalsIgnoreCase("A")){
+                    if (answer.equalsIgnoreCase("A")){
                         ProductManager.productsByCategorie();
-                    }else if(answer.equalsIgnoreCase("S")){
+                    } else if (answer.equalsIgnoreCase("S")){
                         Cart.showAllPurchases();
-                    }else if(answer.equalsIgnoreCase("C")){
+                    } else if (answer.equalsIgnoreCase("C")){
                         Cart.cartSummary();
-                    }else if(answer.equalsIgnoreCase("X")){
+                    } else if (answer.equalsIgnoreCase("X")){
                         ArrayList<Cart> cartItems = Cart.getCurrentCart();
-                        if(cartItems.isEmpty()){
+                        if (cartItems.isEmpty()){
                             ConsoleManeger.clearScreen();
                             ConsoleManeger.title();
                             System.out.println();
@@ -68,10 +66,10 @@ public class Program {
                             System.out.println();
                             ConsoleManeger.title();
                             break;
-                        }else{
+                        } else {
                             System.out.println("Are you sure you want to leave before checkout? [Y/N]");
                             String checkoutAnswer = scanner.nextLine();
-                            if(checkoutAnswer.equalsIgnoreCase("N")){
+                            if (checkoutAnswer.equalsIgnoreCase("N")){
                                 ConsoleManeger.clearScreen();
                                 ConsoleManeger.title();
                                 Cart.checkout();
@@ -79,7 +77,7 @@ public class Program {
                                 System.out.println("See you soon!");
                                 System.out.println();
                                 break;
-                            }else{
+                            } else {
                                 ConsoleManeger.clearScreen();
                                 ConsoleManeger.title();
                                 System.out.println();
@@ -88,14 +86,14 @@ public class Program {
                                 break;
                             }
                         }
-                    }else if(answer.equalsIgnoreCase("O")){
+                    } else if (answer.equalsIgnoreCase("O")){
                         Cart.checkout();
-                    }else{
+                    } else {
                         System.out.println();
                         System.out.println("Invalid input!");
                     }
                 }
-            }else{
+            } else {
                 ConsoleManeger.clearScreen();
                 ConsoleManeger.title();
                 System.out.println();
