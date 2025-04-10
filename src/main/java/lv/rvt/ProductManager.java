@@ -3,6 +3,8 @@ package lv.rvt;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 
 import lv.rvt.tools.Helper;
@@ -89,6 +91,22 @@ public class ProductManager extends Products {
                 ConsoleManeger.title();
 
                 if (!filteredProducts.isEmpty()) {
+                    System.out.println();
+                    System.out.println("Sort the items by: ");
+                    System.out.println("[D] - price ↓           [U] - price .↑            [A] A-Z            [R]Z-A             [ ] - none");
+                    System.out.println();
+                    String sort = scanner.nextLine();
+
+                    if(sort.equalsIgnoreCase("D")){
+                        sortByPriceDown(filteredProducts);
+                    }else if(sort.equalsIgnoreCase("U")){
+                        sortByPriceUp(filteredProducts);
+                    }else if(sort.equalsIgnoreCase("A")){
+                        sortByNameA(filteredProducts);
+                    }else if(sort.equalsIgnoreCase("R")){
+                        sortByNameR(filteredProducts);
+                    }
+
                     System.out.println("---------------------------------------------------------------------------");
                     System.out.printf(" %-5s|", "No.");
                     System.out.printf(" %-15s |", "Categorie");
@@ -120,4 +138,38 @@ public class ProductManager extends Products {
             }
         }
     } 
+
+    private static void sortByPriceDown(ArrayList<Products> items){
+        Collections.sort(items, new Comparator<Products>() {
+            public int compare(Products p1, Products p2) {
+                return Double.compare(p1.price, p2.price);
+            }
+        });
+    }
+
+    
+    private static void sortByPriceUp(ArrayList<Products> items){
+        Collections.sort(items, new Comparator<Products>() {
+            public int compare(Products p1, Products p2) {
+                return Double.compare(p2.price, p1.price);
+            }
+        });
+    }
+
+    private static void sortByNameA(ArrayList<Products> items){
+        Collections.sort(items, new Comparator<Products>() {
+            public int compare(Products p1, Products p2) {
+                return p1.getName().compareTo(p2.getName());
+            }
+        });
+    }
+
+    private static void sortByNameR(ArrayList<Products> items){
+        Collections.sort(items, new Comparator<Products>() {
+            public int compare(Products p1, Products p2) {
+                return p2.getName().compareTo(p1.getName());
+            }
+        });
+    }
+
 }

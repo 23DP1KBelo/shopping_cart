@@ -15,7 +15,7 @@ public class Program {
             Scanner scanner = new Scanner(System.in);
             System.out.println();
             System.out.println("Select an option: ");
-            System.out.println("[L] - Log in                 [S] - Sign in                 [X] - exit");
+            System.out.println("[L] - Log in                 [S] - Sign up                 [X] - exit");
             String logIn = scanner.nextLine();
         
             if (logIn.equalsIgnoreCase("L")) {

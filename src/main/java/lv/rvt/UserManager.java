@@ -11,11 +11,11 @@ import java.util.regex.Pattern;
 import lv.rvt.tools.Helper;
 
 public class UserManager extends User {
-
+   
     public UserManager(String username, String email) {
         super(username, email);
     }
-   
+
     public static final String DELIMITER = ", ";
     public static ArrayList<User> UserList = new ArrayList<>();
   
@@ -31,6 +31,7 @@ public class UserManager extends User {
             if (parts.length >= 2) {
                 String username = parts[0];
                 String email = parts[1];
+                String password = parts[2];
     
                 User user = new User(username, email);
                 UserList.add(user);
@@ -53,7 +54,7 @@ public class UserManager extends User {
         Cart.makeCart();
     }
 
-    // user exists deny Sign in
+    // user exists deny Sign up
     private static boolean userVerificationSignIn(String username, String email) throws IOException{
         getUserlist();
         
@@ -111,6 +112,7 @@ public class UserManager extends User {
         System.out.println();
         System.out.println("* Please enter your email *: ");
         String email = scanner.nextLine();
+        System.out.println("--------------------------------------------------------------------------------");
 
         if(patternMatches(email)){
             if(userVerificationSignIn(username, email)){
@@ -119,14 +121,14 @@ public class UserManager extends User {
             } else if(username.length() < 3){
                 System.out.println("Invalid username must be atleast 4 charecters!");
                 return false;
-            } else {
-                addUser(username, email);
-                ConsoleManeger.clearScreen();
-                ConsoleManeger.title();
-                System.out.println();
-                System.out.println("Sign in sucssesfull!");
-                return true;
-            }
+            }else {
+                    addUser(username, email);
+                    ConsoleManeger.clearScreen();
+                    ConsoleManeger.title();
+                    System.out.println();
+                    System.out.println("Sign in sucssesfull!");
+                    return true;
+                }
         }else{
             System.out.println("Invalid email!");
             return false;
@@ -142,6 +144,7 @@ public class UserManager extends User {
 
         System.out.println("Please enter your email: ");
         String email = scanner.nextLine();
+
 
         if (userVerificationLognIn(username, email)) {
             User.setCurrentUsername(username);
