@@ -31,7 +31,6 @@ public class UserManager extends User {
             if (parts.length >= 2) {
                 String username = parts[0];
                 String email = parts[1];
-                String password = parts[2];
     
                 User user = new User(username, email);
                 UserList.add(user);

@@ -93,7 +93,7 @@ public class ProductManager extends Products {
                 if (!filteredProducts.isEmpty()) {
                     System.out.println();
                     System.out.println("Sort the items by: ");
-                    System.out.println("[D] - price ↓           [U] - price .↑            [A] A-Z            [R]Z-A             [ ] - none");
+                    System.out.println("[D] - price ↓           [U] - price ↑            [A] A-Z            [R]Z-A             [ ] - none");
                     System.out.println();
                     String sort = scanner.nextLine();
 
@@ -138,6 +138,72 @@ public class ProductManager extends Products {
             }
         }
     } 
+
+    private static ArrayList<Products> searchProducts(String search) throws IOException {
+        getProductlist(); 
+        ArrayList<Products> productsBySearch = new ArrayList<>();
+        
+        for (Products product : products) {
+            String name = product.getName();
+            if (name != null && name.toLowerCase().contains(search.toLowerCase())) {
+                boolean alreadyAdded = false;
+                for (Products p : productsBySearch) {
+                    if (p.getName().equalsIgnoreCase(name)) {
+                        alreadyAdded = true;
+                        break;
+                    }
+                }
+                if (!alreadyAdded) {
+                    productsBySearch.add(product);
+                }
+            }
+        }
+    
+        return productsBySearch;
+    }
+
+    public static void getProductsBySearch() throws IOException{
+        Scanner scanner = new Scanner(System.in);
+        System.out.println();
+        System.out.println("Search items: ");
+        String search = scanner.nextLine();
+
+        int productNumber = 1;
+
+        ArrayList<Products> searchProducts = searchProducts(search);
+
+        if(!searchProducts.isEmpty()){
+            System.out.println("---------------------------------------------------------------------------");
+            System.out.printf(" %-4s |", productNumber);
+            System.out.printf(" %-15s |", "Categorie");
+            System.out.printf(" %-30s |", "Name");
+            System.out.printf(" %-5s |", "Price");
+            System.out.printf(" %-6s |", "Weight");
+            System.out.println();
+
+            for(int i = 0; i < searchProducts.size(); i++){
+                System.out.println("---------------------------------------------------------------------------");
+                System.out.printf(" %-4s |", productNumber);
+                System.out.printf(" %-15s | ", searchProducts.get(i).getCategorie());
+                System.out.printf("%-30s | ", searchProducts.get(i).getName());
+                System.out.printf("%-5s | ", searchProducts.get(i).getPrice());
+                System.out.printf("%-6s | ", searchProducts.get(i).getWeight());
+                System.out.println();
+
+                productNumber++;
+            }
+            System.out.println("---------------------------------------------------------------------------");
+            System.out.println();
+            Cart.addToCart(searchProducts);
+        } else {
+            ConsoleManeger.clearScreen();
+
+            System.out.println();
+            System.out.println("Sorry, no items found! Please try again!");
+            System.out.println();
+        }
+    }
+    
 
     private static void sortByPriceDown(ArrayList<Products> items){
         Collections.sort(items, new Comparator<Products>() {

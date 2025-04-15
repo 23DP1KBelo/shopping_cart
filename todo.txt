@@ -3,12 +3,15 @@
     - add products to cart +
     - remove products from cart +
     - filter the products in categories +
-    - sort items 
+    - sort items +
+    - search items +
 3. Product csv +
 4. Product class works with users +
 5. Cart class
-    - aprekini // vajag velvienu aprekinu
+    - aprekini
         - cart sum +
+        - promo code / delivery feed
     - izvada tabulu ar cart +
 6. Validation for user/email +
 7. User interface + / -
+    - colors 

@@ -44,7 +44,7 @@ public class Program {
                     Scanner scanner = new Scanner(System.in);
                     System.out.println();
                     System.out.println("Options: ");
-                    System.out.println(" [A] - add to cart      [S] - see last purcheses     [C] - Cart     [O] - Checkout     [X] - Exit");
+                    System.out.println(" [A] - add to cart      [S] - see last purcheses     [C] - Cart     [O] - Checkout     [P] - Search      [X] - Exit");
         
                     String answer = scanner.nextLine();
 
@@ -54,6 +54,8 @@ public class Program {
                         ProductManager.productsByCategorie();
                     } else if (answer.equalsIgnoreCase("S")){
                         Cart.showAllPurchases();
+                    } else if (answer.equalsIgnoreCase("P")){
+                        ProductManager.getProductsBySearch();
                     } else if (answer.equalsIgnoreCase("C")){
                         Cart.cartSummary();
                     } else if (answer.equalsIgnoreCase("X")){
