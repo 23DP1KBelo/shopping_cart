@@ -38,8 +38,53 @@ public class ProductManager extends Products {
         return products;
     }
 
-    public static ArrayList<Products> getProductsByCategorie(String userInput) throws IOException {
+    public static void seeAllProducts() throws IOException{
+        products = new ArrayList<>();
         getProductlist();
+        Scanner scanner = new Scanner(System.in);
+        int productNumber = 1;
+        ConsoleManeger.clearScreen();
+        ConsoleManeger.title();
+
+        System.out.println();
+        System.out.println("\u001B[97m---------------------------------------------------------------------------");
+        System.out.printf(" %-5s|", "No.");
+        System.out.printf(" %-15s |", "Categorie");
+        System.out.printf(" %-30s |", "Name");
+        System.out.printf(" %-5s |", "Price");
+        System.out.printf(" %-6s |", "Weight");
+        System.out.println();
+
+        for(Products p : products){
+            System.out.println("---------------------------------------------------------------------------");
+            System.out.printf(" %-4s |", productNumber);
+            System.out.printf(" %-15s | ", p.getCategorie());
+            System.out.printf("%-30s | ", p.getName());
+            System.out.printf("%-5s | ", p.getPrice());
+            System.out.printf("%-6s | ", p.getWeight());
+            System.out.println();
+
+            productNumber ++;
+        }
+        System.out.println("---------------------------------------------------------------------------");
+        System.out.println();
+        System.out.println("[C] - fillter by category           [S] - search by name         [A] - add to cart      [ ] - back");
+        String answer = scanner.nextLine();
+        if(answer.equalsIgnoreCase("C")){
+            ConsoleManeger.clearScreen();
+            ConsoleManeger.title();
+            System.out.println("Please select an option: ");
+            productsByCategorie();
+        } else if(answer.equalsIgnoreCase("S")){
+            ConsoleManeger.clearScreen();
+            ConsoleManeger.title();
+            getProductsBySearch();
+        } else if(answer.equalsIgnoreCase("A")){
+            Cart.addToCart(products);
+        }
+    }
+
+    public static ArrayList<Products> getProductsByCategorie(String userInput) throws IOException {
         ArrayList<Products> productsByCategorie = new ArrayList<>();
 
         userInput = userInput.trim();
@@ -54,9 +99,11 @@ public class ProductManager extends Products {
 
     public static boolean productsByCategorie() throws IOException {
         Scanner scanner = new Scanner(System.in);
+        products = new ArrayList<>();
+        getProductlist();
         while (true) {
             System.out.println();
-            System.out.println("Options: ");
+            System.out.println("\u001B[97mOptions: ");
             System.out.println("[A] - add to cart                 [X] - stop adding products");
     
             String programmRun = scanner.nextLine().trim();
@@ -71,7 +118,7 @@ public class ProductManager extends Products {
             if (programmRun.equalsIgnoreCase("A")) {
 
                 System.out.println();
-                System.out.println("Categories:");
+                System.out.println("\u001B[97mCategories:");
                 System.out.println("""
                            Vegetables
                            Fruits
@@ -92,8 +139,8 @@ public class ProductManager extends Products {
 
                 if (!filteredProducts.isEmpty()) {
                     System.out.println();
-                    System.out.println("Sort the items by: ");
-                    System.out.println("[D] - price ↓           [U] - price ↑            [A] A-Z            [R]Z-A             [ ] - none");
+                    System.out.println("\u001B[97mSort the items by: ");
+                    System.out.println("[D] - price ↑           [U] - price ↓           [A] A-Z            [R]Z-A             [ ] - none");
                     System.out.println();
                     String sort = scanner.nextLine();
 
@@ -114,7 +161,7 @@ public class ProductManager extends Products {
                     System.out.printf(" %-5s |", "Price");
                     System.out.printf(" %-6s |", "Weight");
                     System.out.println();
-                    for (int i = 0; i<10; i++) {
+                    for (int i = 0; i<filteredProducts.size(); i++) {
                         System.out.println("---------------------------------------------------------------------------");
                         System.out.printf(" %-4s |", productNumber);
                         System.out.printf(" %-15s | ", filteredProducts.get(i).getCategorie());
@@ -132,7 +179,7 @@ public class ProductManager extends Products {
                     ConsoleManeger.clearScreen();
 
                     System.out.println();
-                    System.out.println("Sorry, no items in this category! Please select a category from the list.");
+                    System.out.println("\u001B[31mSorry, no items in this category! Please select a category from the list.");
                     System.out.println();
                 }
             }
@@ -140,7 +187,6 @@ public class ProductManager extends Products {
     } 
 
     private static ArrayList<Products> searchProducts(String search) throws IOException {
-        getProductlist(); 
         ArrayList<Products> productsBySearch = new ArrayList<>();
         
         for (Products product : products) {
@@ -158,14 +204,13 @@ public class ProductManager extends Products {
                 }
             }
         }
-    
         return productsBySearch;
     }
 
     public static void getProductsBySearch() throws IOException{
         Scanner scanner = new Scanner(System.in);
         System.out.println();
-        System.out.println("Search items: ");
+        System.out.println("\u001B[97mSearch items: ");
         String search = scanner.nextLine();
 
         int productNumber = 1;
@@ -199,7 +244,7 @@ public class ProductManager extends Products {
             ConsoleManeger.clearScreen();
 
             System.out.println();
-            System.out.println("Sorry, no items found! Please try again!");
+            System.out.println("\3u001B[31mSorry, no items found! Please try again!");
             System.out.println();
         }
     }

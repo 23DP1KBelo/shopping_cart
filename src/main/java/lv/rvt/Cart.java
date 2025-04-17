@@ -128,18 +128,18 @@ public class Cart extends Products{
     }
 
     // add items to cart
-    public static void addToCart(ArrayList<Products> filteredProducts) throws IOException {
+    public static void addToCart(ArrayList<Products> array) throws IOException {
         @SuppressWarnings("resource")
         Scanner scanner = new Scanner(System.in);
         
         System.out.println("Please enter the number of the product you want to add to your cart (1, 2, etc.): ");
         Integer productNumber = Integer.valueOf(scanner.nextLine());
-        if (productNumber < 1 || productNumber > 10) {
+        if (productNumber < 1 || productNumber > array.size()) {
             System.out.println("Invalid product selection.");
             return;
         }
     
-        Products selectedProduct = filteredProducts.get(productNumber - 1);
+        Products selectedProduct = array.get(productNumber - 1);
         
         System.out.println("Enter the quantity you want to add to the cart: ");
         Integer quantity = Integer.valueOf(scanner.nextLine());
@@ -177,11 +177,11 @@ public class Cart extends Products{
         ArrayList<Cart> cartItems = Cart.getCart(username);
     
         if (cartItems.isEmpty()) {
-            System.out.println("No purchases found for user: " + username);
+            System.out.println("\u001B[91mNo purchases found for user: " + username);
             return;
         }
     
-        System.out.println("-------------------------------------------------------------------------------------");
+        System.out.println("\u001B[37m-------------------------------------------------------------------------------------");
         System.out.printf(" %-2s |", "No.");
         System.out.printf(" %-15s |", "Categorie");
         System.out.printf(" %-30s |", "Name");
@@ -197,16 +197,17 @@ public class Cart extends Products{
         for (Cart cartItem : cartItems) {
             if (cartItem.getSessionId() != currentSessionId) {
                 if (currentSessionId != -1) {
-                    System.out.println("\n-------------------------------------------------------------------------------------");
+                    System.out.println("\u001B[37m\n-------------------------------------------------------------------------------------");
                 }
-                System.out.println("Session " + cartItem.getSessionId() + " Purchases:");
+                System.out.println();
+                System.out.println("\u001B[92mSession " + cartItem.getSessionId() + " Purchases:");
                 System.out.println("-------------------------------------------------------------------------------------");
                 productNumber = 1; 
                 currentSessionId = cartItem.getSessionId();
             }
     
-            System.out.println("-------------------------------------------------------------------------------------");
-            System.out.printf(" %-3s |", productNumber);
+            System.out.println("\u001B[37m-------------------------------------------------------------------------------------");
+            System.out.printf(" %-3s |","Nr.");
             System.out.printf(" %-15s |", cartItem.getCategorie());
             System.out.printf(" %-30s |", cartItem.getName());
             System.out.printf(" %-5.2f |", cartItem.getPrice());
@@ -229,13 +230,14 @@ public class Cart extends Products{
         Scanner scanner = new Scanner(System.in);
 
         if (cart.isEmpty()) {
-            System.out.println("No puroducts in your cart!");
+            System.out.println("\u001B[31mNo puroducts in your cart!");
             return;
         }
 
         Integer lastSessionId = cart.get(cart.size() - 1).getSessionId();
 
-        System.out.println("-------------------------------------------------------------------------------------");
+        System.out.println();
+        System.out.println("\u001B[37m-------------------------------------------------------------------------------------");
         System.out.printf(" %-2s |", "No.");
         System.out.printf(" %-15s |", "Categorie");
         System.out.printf(" %-30s |", "Name");
@@ -266,18 +268,26 @@ public class Cart extends Products{
 
         System.out.println("-------------------------------------------------------------------------------------");
         System.out.println();
-        System.out.println("Total: " + sum);
+        System.out.println("\u001B[32mTotal: " + sum);
 
-        System.out.println("[R] - Remove product            [C] - checkout            [ ] - back");
+        System.out.println("\u001B[37m[R] - Remove product            [C] - checkout            [P] - ");
         String remove = scanner.nextLine();
 
         if(remove.equalsIgnoreCase("R")){
             removeFromCart();
             cartSummary();
-            System.out.println("Product removed succesfuly!");
+            System.out.println("\u001B[32mProduct removed succesfuly!");
             System.out.println();
         }else if(remove.equalsIgnoreCase("C")){
             checkout();
+        } else if(remove.equalsIgnoreCase("p")){
+            System.out.println("\u001B[37mEnter promocode: ");
+            String answer = scanner.nextLine();
+            if(answer.equals("PROMO")){
+                System.out.printf("\u001B[32mTotal with discount:  %-5.2f", (sum - promocode(sum, 15)));
+            } else {
+                System.out.println("\u001B[31mWrong promo code!");
+            }
         }
     }
 
@@ -287,12 +297,16 @@ public class Cart extends Products{
     
         if (cart.isEmpty()) {
             System.out.println();
-            System.out.println("No items found for user: " + username);
+            System.out.println("\u001B[31mNo items found for: " + username);
         }else{
-            System.out.println("Checkout sucsessful!");
+            System.out.println("\u001B[32mCheckout sucsessful!");
             saveCartToFile();
             cart.clear();
         }
+    }
+
+    public static double promocode(double total, int discount) {
+        return (total * discount) / 100;
     }
 
 }

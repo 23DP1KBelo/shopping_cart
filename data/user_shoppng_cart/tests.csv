@@ -6,3 +6,12 @@ session number;categorie;name;price;weight;quantity
 3;Meat;Chicken breast;4.199999999999999;200;3
 3;Fruits;Peach;2.25;300;3
 4;Drinks;Water;0.7;1;1
+5;Meat;Chicken wings;0.6;40;2
+5;Meat;Chicken wings;0.6;40;2
+5;Meat;Chicken breast;1.4;200;1
+6;Meat;Bacon (sliced);20.0;250;10
+6;Drinks;Icea Tea;3.8;1;2
+7;Meat;Chicken breast;1.4;200;1
+8;Meat;Chicken wings;0.3;40;1
+9;Meat;Chicken wings;0.3;40;1
+9;Drinks;Water spakling;1.5;1;2

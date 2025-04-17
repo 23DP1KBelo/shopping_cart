@@ -9,7 +9,7 @@ public class Program {
         ConsoleManeger.title();
 
         System.out.println();
-        System.out.println("Welcome to freshly!");
+        System.out.println("\u001B[97m Welcome to freshly!");
         Boolean exit = false;
         while (true) {
             Scanner scanner = new Scanner(System.in);
@@ -43,19 +43,16 @@ public class Program {
                 while (true) {
                     Scanner scanner = new Scanner(System.in);
                     System.out.println();
-                    System.out.println("Options: ");
-                    System.out.println(" [A] - add to cart      [S] - see last purcheses     [C] - Cart     [O] - Checkout     [P] - Search      [X] - Exit");
+                    System.out.println("\u001B[97mOptions: ");
+                    System.out.println("[S] - see all products      [A] - see all purcheses     [C] - Cart      [O] - Checkout      [X] - Exit");
         
                     String answer = scanner.nextLine();
-
                     ConsoleManeger.clearScreen();
                     ConsoleManeger.title();
-                    if (answer.equalsIgnoreCase("A")){
-                        ProductManager.productsByCategorie();
-                    } else if (answer.equalsIgnoreCase("S")){
+                    if (answer.equalsIgnoreCase("S")){
+                        ProductManager.seeAllProducts();
+                    } else if (answer.equalsIgnoreCase("A")){
                         Cart.showAllPurchases();
-                    } else if (answer.equalsIgnoreCase("P")){
-                        ProductManager.getProductsBySearch();
                     } else if (answer.equalsIgnoreCase("C")){
                         Cart.cartSummary();
                     } else if (answer.equalsIgnoreCase("X")){
@@ -64,26 +61,26 @@ public class Program {
                             ConsoleManeger.clearScreen();
                             ConsoleManeger.title();
                             System.out.println();
-                            System.out.println("See you soon!");
+                            System.out.println("\u001B[97mSee you soon!");
                             System.out.println();
                             ConsoleManeger.title();
                             break;
                         } else {
-                            System.out.println("Are you sure you want to leave before checkout? [Y/N]");
+                            System.out.println("\u001B[31mAre you sure you want to leave before checkout? [Y/N]");
                             String checkoutAnswer = scanner.nextLine();
                             if (checkoutAnswer.equalsIgnoreCase("N")){
                                 ConsoleManeger.clearScreen();
                                 ConsoleManeger.title();
                                 Cart.checkout();
                                 System.out.println();
-                                System.out.println("See you soon!");
+                                System.out.println("\u001B[97mSee you soon!");
                                 System.out.println();
                                 break;
                             } else {
                                 ConsoleManeger.clearScreen();
                                 ConsoleManeger.title();
                                 System.out.println();
-                                System.out.println("See you soon!");
+                                System.out.println("\u001B[97mSee you soon!");
                                 System.out.println();
                                 break;
                             }
@@ -92,14 +89,14 @@ public class Program {
                         Cart.checkout();
                     } else {
                         System.out.println();
-                        System.out.println("Invalid input!");
+                        System.out.println("\u001B[31mInvalid input!");
                     }
                 }
             } else {
                 ConsoleManeger.clearScreen();
                 ConsoleManeger.title();
                 System.out.println();
-                System.out.println("See you soon!");
+                System.out.println("\u001B[97mSee you soon!");
                 System.out.println();
             }
         }
