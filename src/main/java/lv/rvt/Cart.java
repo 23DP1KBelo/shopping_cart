@@ -143,6 +143,10 @@ public class Cart extends Products{
         
         System.out.println("Enter the quantity you want to add to the cart: ");
         Integer quantity = Integer.valueOf(scanner.nextLine());
+        if(quantity % 2 != 0){
+            System.out.println("Invalid input.");
+            return;
+        }
     
         Integer sessionId = Cart.getLastSessionId();
         Cart newCartItem = new Cart(sessionId, selectedProduct.getCategorie(), selectedProduct.getName(), selectedProduct.getPrice() * quantity, selectedProduct.getWeight(), quantity);
@@ -207,7 +211,7 @@ public class Cart extends Products{
             }
     
             System.out.println("\u001B[37m-------------------------------------------------------------------------------------");
-            System.out.printf(" %-3s |","Nr.");
+            System.out.printf(" %-3s |","No.");
             System.out.printf(" %-15s |", cartItem.getCategorie());
             System.out.printf(" %-30s |", cartItem.getName());
             System.out.printf(" %-5.2f |", cartItem.getPrice());
@@ -270,7 +274,7 @@ public class Cart extends Products{
         System.out.println();
         System.out.println("\u001B[32mTotal: " + sum);
 
-        System.out.println("\u001B[37m[R] - Remove product            [C] - checkout            [P] - ");
+        System.out.println("\u001B[37m[R] - Remove product            [C] - checkout            [P] - discount code             [ ] - back ");
         String remove = scanner.nextLine();
 
         if(remove.equalsIgnoreCase("R")){
@@ -280,7 +284,7 @@ public class Cart extends Products{
             System.out.println();
         }else if(remove.equalsIgnoreCase("C")){
             checkout();
-        } else if(remove.equalsIgnoreCase("p")){
+        } else if(remove.equalsIgnoreCase("P")){
             System.out.println("\u001B[37mEnter promocode: ");
             String answer = scanner.nextLine();
             if(answer.equals("PROMO")){
