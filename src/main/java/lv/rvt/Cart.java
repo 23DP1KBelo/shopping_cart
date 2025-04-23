@@ -143,10 +143,6 @@ public class Cart extends Products{
         
         System.out.println("Enter the quantity you want to add to the cart: ");
         Integer quantity = Integer.valueOf(scanner.nextLine());
-        if(quantity % 2 != 0){
-            System.out.println("Invalid input.");
-            return;
-        }
     
         Integer sessionId = Cart.getLastSessionId();
         Cart newCartItem = new Cart(sessionId, selectedProduct.getCategorie(), selectedProduct.getName(), selectedProduct.getPrice() * quantity, selectedProduct.getWeight(), quantity);
