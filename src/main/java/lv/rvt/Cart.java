@@ -133,13 +133,13 @@ public class Cart extends Products{
         Scanner scanner = new Scanner(System.in);
         
         System.out.println("Please enter the number of the product you want to add to your cart (1, 2, etc.): ");
-        Integer productNumber = Integer.valueOf(scanner.nextLine());
-        if (productNumber < 1 || productNumber > array.size()) {
+        String productNumber = scanner.nextLine();
+        if (Integer.valueOf(productNumber) < 1 || Integer.valueOf(productNumber) > array.size()) {
             System.out.println("Invalid product selection.");
             return;
         }
     
-        Products selectedProduct = array.get(productNumber - 1);
+        Products selectedProduct = array.get(Integer.valueOf(productNumber) - 1);
         
         System.out.println("Enter the quantity you want to add to the cart: ");
         Integer quantity = Integer.valueOf(scanner.nextLine());

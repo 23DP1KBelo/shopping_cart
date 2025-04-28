@@ -25,7 +25,7 @@ public class Program {
             } else if (logIn.equalsIgnoreCase("S")) {
                 if(UserManager.users()== true){
                     System.out.println();
-                    System.out.println("Please log in: ");
+                    System.out.println("\u001B[97mPlease log in: ");
                     if(UserManager.login() == true){
                        break;
                     }

@@ -121,13 +121,14 @@ public class UserManager extends User {
                 System.out.println("\u001B[31mInvalid username must be atleast 4 charecters!");
                 return false;
             }else {
-                    addUser(username, email);
-                    ConsoleManeger.clearScreen();
-                    ConsoleManeger.title();
-                    System.out.println();
-                    System.out.println("Sign in sucssesfull!");
-                    return true;
-                }
+                User.setCurrentUsername(username);
+                addUser(username, email);
+                ConsoleManeger.clearScreen();
+                ConsoleManeger.title();
+                System.out.println();
+                System.out.println("\u001B[92mSign in sucssesfull!");
+                return true;
+            }
         }else{
             System.out.println("\u001B[31mInvalid email!");
             return false;
