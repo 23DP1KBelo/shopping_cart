@@ -14,6 +14,7 @@ public class Cart extends Products{
     public String username;
     public static BufferedWriter Newfile;
     public Integer sessonId;
+    private static Boolean usedPromo = false;
     public static final String DELIMITER = ";";
     
     public Cart(Integer sessonId,String categories, String name, Double price, String weight, Integer quantity) {
@@ -32,6 +33,10 @@ public class Cart extends Products{
 
     public Cart(String categories, String name, Double price, String weight) {
         super(categories, name, price, weight);
+    }
+    
+    private static Boolean setPromoUssege(){
+        return usedPromo = true;
     }
 
     @Override
@@ -134,8 +139,8 @@ public class Cart extends Products{
         
         System.out.println("Please enter the number of the product you want to add to your cart (1, 2, etc.): ");
         String productNumber = scanner.nextLine();
-        if (Integer.valueOf(productNumber) < 1 || Integer.valueOf(productNumber) > array.size()) {
-            System.out.println("Invalid product selection.");
+        if (Integer.parseInt(productNumber) < 1 || Integer.valueOf(productNumber) > array.size()) {
+            System.out.println("\u001B[32mInvalid product selection.");
             return;
         }
     
@@ -155,17 +160,18 @@ public class Cart extends Products{
     }
 
     // remove items from cart
-    public static void removeFromCart() throws IOException{
+    public static Boolean removeFromCart() throws IOException{
         Scanner scanner = new Scanner(System.in);
         
-        System.out.println("Please enter the number of the product you want to remove (1, 2, etc.): ");
+        System.out.println("\u001B[97mPlease enter the number of the product you want to remove (1, 2, etc.): ");
         Integer productNumber = Integer.valueOf(scanner.nextLine());
 
         if (productNumber < 1 || productNumber > cart.size()) {
-            System.out.println("Invalid product selection.");
-            return;
+            System.out.println("\u001B[31mInvalid product selection.");
+            return false;
         }
-        Cart.cart.remove(productNumber -1);
+        Cart.cart.remove(productNumber - 1);
+        return true;
     }
 
     // see all purcheses
@@ -177,7 +183,7 @@ public class Cart extends Products{
         ArrayList<Cart> cartItems = Cart.getCart(username);
     
         if (cartItems.isEmpty()) {
-            System.out.println("\u001B[91mNo purchases found for user: " + username);
+            System.out.println("\u001B[31mNo purchases found for user: " + username);
             return;
         }
     
@@ -228,7 +234,6 @@ public class Cart extends Products{
         ConsoleManeger.title();
 
         Scanner scanner = new Scanner(System.in);
-
         if (cart.isEmpty()) {
             System.out.println("\u001B[31mNo products in your cart!");
             return;
@@ -268,25 +273,32 @@ public class Cart extends Products{
 
         System.out.println("-------------------------------------------------------------------------------------");
         System.out.println();
-        System.out.println("\u001B[32mTotal: " + sum);
-
+        if(usedPromo){
+            sum = sum - promocode(sum, 15);
+        }
+        System.out.printf("\u001B[32mTotal:  %-5.2f", sum);
+        System.out.println();
         System.out.println("\u001B[37m[R] - Remove product            [C] - checkout            [P] - discount code             [ ] - back ");
         String remove = scanner.nextLine();
 
         if(remove.equalsIgnoreCase("R")){
-            removeFromCart();
-            cartSummary();
-            System.out.println("\u001B[32mProduct removed succesfuly!");
+            if(removeFromCart()){
+                System.out.println("\u001B[32mProduct removed succesfuly!");
+            }
             System.out.println();
         }else if(remove.equalsIgnoreCase("C")){
             checkout();
         } else if(remove.equalsIgnoreCase("P")){
-            System.out.println("\u001B[37mEnter promocode: ");
-            String answer = scanner.nextLine();
-            if(answer.equals("PROMO")){
-                System.out.printf("\u001B[32mTotal with discount:  %-5.2f", (sum - promocode(sum, 15)));
-            } else {
-                System.out.println("\u001B[31mWrong promo code!");
+            if(!usedPromo){
+                System.out.println("\u001B[37mEnter promocode: ");
+                String answer = scanner.nextLine();
+                if(answer.equals("PROMO")){
+                    System.out.printf("\u001B[32mTotal with discount:  %-5.2f", (sum - promocode(sum, 15)));
+                } else {
+                    System.out.println("\u001B[31mWrong promo code!");
+                }
+            } else{
+                System.out.println("\u001B[31mPromocode used already!");
             }
         }
     }
@@ -306,6 +318,7 @@ public class Cart extends Products{
     }
 
     public static double promocode(double total, int discount) {
+        setPromoUssege();
         return (total * discount) / 100;
     }
 
