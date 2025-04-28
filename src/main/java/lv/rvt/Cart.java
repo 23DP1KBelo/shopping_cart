@@ -15,7 +15,7 @@ public class Cart extends Products{
     public static BufferedWriter Newfile;
     public Integer sessonId;
     public static final String DELIMITER = ";";
-
+    
     public Cart(Integer sessonId,String categories, String name, Double price, String weight, Integer quantity) {
         super(categories, name, price, weight, quantity);
         this.sessonId = sessonId;
@@ -207,7 +207,7 @@ public class Cart extends Products{
             }
     
             System.out.println("\u001B[37m-------------------------------------------------------------------------------------");
-            System.out.printf(" %-3s |","No.");
+            System.out.printf(" %-3s |", productNumber);
             System.out.printf(" %-15s |", cartItem.getCategorie());
             System.out.printf(" %-30s |", cartItem.getName());
             System.out.printf(" %-5.2f |", cartItem.getPrice());
@@ -222,7 +222,7 @@ public class Cart extends Products{
         System.out.println();
     }
 
-    // see session added products
+    // see sessions added products
     public static void cartSummary() throws IOException{
         ConsoleManeger.clearScreen();
         ConsoleManeger.title();
@@ -230,7 +230,7 @@ public class Cart extends Products{
         Scanner scanner = new Scanner(System.in);
 
         if (cart.isEmpty()) {
-            System.out.println("\u001B[31mNo puroducts in your cart!");
+            System.out.println("\u001B[31mNo products in your cart!");
             return;
         }
 

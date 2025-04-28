@@ -9,12 +9,12 @@ public class Program {
         ConsoleManeger.title();
 
         System.out.println();
-        System.out.println("\u001B[97m Welcome to freshly!");
+        System.out.println("\u001B[97mWelcome to freshly!");
         Boolean exit = false;
         while (true) {
             Scanner scanner = new Scanner(System.in);
             System.out.println();
-            System.out.println("Select an option: ");
+            System.out.println("\u001B[97mSelect an option: ");
             System.out.println("[L] - Log in                 [S] - Sign up                 [X] - exit");
             String logIn = scanner.nextLine();
         
@@ -34,7 +34,7 @@ public class Program {
                 exit = true;
                 break;
             } else {
-                System.out.println("Invalid input.");
+                System.out.println("\u001B[31mInvalid input.");
             }
         }
             if (exit == false){
@@ -44,7 +44,7 @@ public class Program {
                     Scanner scanner = new Scanner(System.in);
                     System.out.println();
                     System.out.println("\u001B[97mOptions: ");
-                    System.out.println("[S] - see all products      [A] - see all purcheses     [C] - Cart      [O] - Checkout      [X] - Exit");
+                    System.out.println("[S] - see all products      [A] - see all purchases     [C] - cart      [O] - checkout      [X] - exit");
         
                     String answer = scanner.nextLine();
                     ConsoleManeger.clearScreen();
@@ -62,8 +62,6 @@ public class Program {
                             ConsoleManeger.title();
                             System.out.println();
                             System.out.println("\u001B[97mSee you soon!");
-                            System.out.println();
-                            ConsoleManeger.title();
                             break;
                         } else {
                             System.out.println("\u001B[31mAre you sure you want to leave before checkout? [Y/N]");

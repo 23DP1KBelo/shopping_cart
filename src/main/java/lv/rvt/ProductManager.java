@@ -73,7 +73,6 @@ public class ProductManager extends Products {
         if(answer.equalsIgnoreCase("C")){
             ConsoleManeger.clearScreen();
             ConsoleManeger.title();
-            System.out.println("Please select an option: ");
             productsByCategorie();
         } else if(answer.equalsIgnoreCase("S")){
             ConsoleManeger.clearScreen();
@@ -177,7 +176,7 @@ public class ProductManager extends Products {
                     Cart.addToCart(filteredProducts);
                 } else {
                     ConsoleManeger.clearScreen();
-
+                    ConsoleManeger.title();
                     System.out.println();
                     System.out.println("\u001B[31mSorry, no items in this category! Please select a category from the list.");
                     System.out.println();
@@ -211,7 +210,7 @@ public class ProductManager extends Products {
         Scanner scanner = new Scanner(System.in);
         System.out.println();
         System.out.println("\u001B[97mSearch items: ");
-        String search = scanner.nextLine();
+        String search = scanner.nextLine().trim();
 
         int productNumber = 1;
 
@@ -242,9 +241,10 @@ public class ProductManager extends Products {
             Cart.addToCart(searchProducts);
         } else {
             ConsoleManeger.clearScreen();
+            ConsoleManeger.title();
 
             System.out.println();
-            System.out.println("\3u001B[31mSorry, no items found! Please try again!");
+            System.out.println("\u001B[31mSorry, no items found! Please try again!");
             System.out.println();
         }
     }

@@ -70,7 +70,7 @@ public class UserManager extends User {
         getUserlist();
         
         for (User user : UserList) {
-            if (user.getUsername().equalsIgnoreCase(username) && user.getEmail().equalsIgnoreCase(email)) {
+            if (user.getUsername().equals(username) && user.getEmail().equals(email)) {
                 return true;
             }
         }
@@ -90,7 +90,7 @@ public class UserManager extends User {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println();
-        System.out.println("Please fill out this form ( * need to fill out)");
+        System.out.println("Please fill out this form ( *fill out)");
         System.out.println("--------------------------------------------------------------------------------");
 
         System.out.println();
@@ -115,10 +115,10 @@ public class UserManager extends User {
 
         if(patternMatches(email)){
             if(userVerificationSignIn(username, email)){
-                System.out.println("User exists in the system. Try a different one!");
+                System.out.println("\u001B[31mUser exists in the system. Try a different one!");
                 return false;
             } else if(username.length() < 3){
-                System.out.println("Invalid username must be atleast 4 charecters!");
+                System.out.println("\u001B[31mInvalid username must be atleast 4 charecters!");
                 return false;
             }else {
                     addUser(username, email);
@@ -129,7 +129,7 @@ public class UserManager extends User {
                     return true;
                 }
         }else{
-            System.out.println("Invalid email!");
+            System.out.println("\u001B[31mInvalid email!");
             return false;
         }
     }
@@ -149,7 +149,7 @@ public class UserManager extends User {
             User.setCurrentUsername(username);
             return true;
         } else {
-            System.out.println("User dosen't exists in the system. Try a different one!");
+            System.out.println("\u001B[31mUser dosen't exists in the system. Try a different one!");
             return false;
         }
     }
