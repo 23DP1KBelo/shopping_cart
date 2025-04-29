@@ -10,8 +10,6 @@
 5. Cart class +
     - aprekini +
         - cart sum +
-        - promo code / delivery feed +
+        - promo code +
     - izvada tabulu ar cart +
 6. Validation for user/email +
-7. User interface
-    - colors + / -

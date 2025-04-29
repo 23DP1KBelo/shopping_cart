@@ -140,20 +140,18 @@ public class Cart extends Products{
         System.out.println("Please enter the number of the product you want to add to your cart (1, 2, etc.): ");
         String productNumber = scanner.nextLine();
         if (Integer.parseInt(productNumber) < 1 || Integer.valueOf(productNumber) > array.size()) {
-            System.out.println("\u001B[32mInvalid product selection.");
+            System.out.println("\u001B[31mInvalid product selection.");
             return;
         }
     
         Products selectedProduct = array.get(Integer.valueOf(productNumber) - 1);
         
-        System.out.println("Enter the quantity you want to add to the cart: ");
+        System.out.println("\u001B[97mEnter the quantity you want to add to the cart: ");
         Integer quantity = Integer.valueOf(scanner.nextLine());
     
         Integer sessionId = Cart.getLastSessionId();
         Cart newCartItem = new Cart(sessionId, selectedProduct.getCategorie(), selectedProduct.getName(), selectedProduct.getPrice() * quantity, selectedProduct.getWeight(), quantity);
         Cart.cart.add(newCartItem);
-    
-        System.out.println("Product/s added to your cart!");
 
         ConsoleManeger.clearScreen();
         ConsoleManeger.title();
