@@ -275,6 +275,7 @@ public class Cart extends Products{
             sum = sum - promocode(sum, 15);
         }
         System.out.printf("\u001B[32mTotal:  %-5.2f", sum);
+        System.out.print("$");
         System.out.println();
         System.out.println("\u001B[37m[R] - Remove product            [C] - checkout            [P] - discount code             [ ] - back ");
         String remove = scanner.nextLine();
@@ -292,6 +293,7 @@ public class Cart extends Products{
                 String answer = scanner.nextLine();
                 if(answer.equals("PROMO")){
                     System.out.printf("\u001B[32mTotal with discount:  %-5.2f", (sum - promocode(sum, 15)));
+                    System.out.print("$");
                 } else {
                     System.out.println("\u001B[31mWrong promo code!");
                 }
