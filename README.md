@@ -2,6 +2,10 @@
 ## Ievads
 "Freshly" ir sistēma caur kuru var iegadāties dažāda veida produktus, kā piem. dzērienus, auguļus, dārzeņus un gaļu. Sistēmas mērķis ir dot iespēju klientiem iegādāties kvalitātīvus un sertificētus produktus, kurus ir iespējams filtrēt klienta vajadzībām, kā arī ērti un droši veikt produktu pasūtīšanu.
 
+## Lejupielāde
+Sistemu “Freshly” iespējams lejupielādēt zip arhivā sistēmas mājaslapā vai
+atrodot sistēmu [GitHub](https://github.com/23DP1KBelo/shopping_cart).
+
 ## Lietotāja interfeisa pārskats
 ### Galvenā izvelne
 ![Main screen](media/main.png)
@@ -78,7 +82,6 @@ Pēc kā tiks veikta datu validācija un lietotāja pieslēgšanas process tiks 
 1. Lai noformētu pasūtījumu ir nepieciešams atvērt grozu. Pēc kā nospiest taustiņu "C" un ENTER lai noformētu pasūtījumu.
 ![Checkout selection](media/checkout_selection.png)
 2. Pēc kā tiks izvadīts paziņojums par to, ka pasūtījums tika veiksmīgi noformēts.
-
 
 ### Pirkumu vēstures apskatīšana
 1. Nepieciešams atgriezties uz galveno izvelni. Pēc kā nospiest taustiņu "A" un ENTER.
