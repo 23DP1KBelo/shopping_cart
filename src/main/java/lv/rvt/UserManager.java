@@ -113,12 +113,13 @@ public class UserManager extends User {
         String email = scanner.nextLine();
         System.out.println("--------------------------------------------------------------------------------");
 
+        if(username.length() < 4){
+                System.out.println("\u001B[31mInvalid username must be atleast 4 charecters!");
+                return false;
+        }
         if(patternMatches(email)){
             if(userVerificationSignIn(username, email)){
                 System.out.println("\u001B[31mUser exists in the system. Try a different one!");
-                return false;
-            } else if(username.length() < 3){
-                System.out.println("\u001B[31mInvalid username must be atleast 4 charecters!");
                 return false;
             }else {
                 User.setCurrentUsername(username);

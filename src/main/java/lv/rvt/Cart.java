@@ -139,6 +139,9 @@ public class Cart extends Products{
         
         System.out.println("Please enter the number of the product you want to add to your cart (1, 2, etc.): ");
         String productNumber = scanner.nextLine();
+        if(productNumber.isEmpty()){
+            return;
+        }
         if (Integer.parseInt(productNumber) < 1 || Integer.valueOf(productNumber) > array.size()) {
             System.out.println("\u001B[31mInvalid product selection.");
             return;
